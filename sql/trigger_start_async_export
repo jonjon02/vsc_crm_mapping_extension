@@ -1,0 +1,7 @@
+CREATE TRIGGER trigger_start_async_export ON cobra_Data.dbo.AP_FIELDINFOS
+AFTER INSERT, UPDATE
+AS
+BEGIN
+	EXEC msdb.dbo.sp_start_job @job_name='sql_export_cobra_mapping_json';
+END
+

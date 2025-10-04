@@ -12,9 +12,14 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
+    "commands": [
+    {
       "command": "cobra-crm-mapping.helloWorld",
       "title": "Hello World"
+    }, 
+    {
+      "command": "cobra-crm-mapping.tableNameLogical",
+      "title": "Suche nach physikalischem Tabellennamen"
     }]
   },
   "scripts": {

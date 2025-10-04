@@ -1,5 +1,5 @@
 # Prerequisites for this Extension to work
-- Service/Job that exports JSON-File via, e.g. via BCP 
+- Service/Job that exports JSON-File, for example via BCP 
 - Database-Trigger on *Cobra_Data.DBO.AP_FIELDINFOS* that *asynchronously* starts the Service/Job
 
 # Optional:

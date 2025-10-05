@@ -14,8 +14,12 @@
   "contributes": {
     "commands": [
     {
-      "command": "cobra-crm-mapping.queryCobraMapping",
-      "title": "Cobra Datenbankstruktur"
+      "command": "cobra-crm-mapping.queryCobraColumns",
+      "title": "Cobra query columns"
+    },
+    {
+      "command": "cobra-crm-mapping.queryCobraTables",
+      "title": "Cobra query tables"
     }]
   },
   "scripts": {

@@ -47,8 +47,7 @@ function activate(context) {
 			vscode.window.showInformationMessage(`Sie haben ${tables} gewählt`)
 			//editor.insertSnippet(`${tables.T})
 		}
-		}
-	)
+	})
 }
 
 function deactivate() {}

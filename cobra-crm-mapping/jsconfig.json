@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
-		"module": "Node16",
+		"module": "node16",
 		"target": "ES2022",
+		"resolveJsonModule": true,
 		"checkJs": true,  /* Typecheck .js files. */
 		"lib": [
 			"ES2022"

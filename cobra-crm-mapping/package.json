@@ -14,12 +14,8 @@
   "contributes": {
     "commands": [
     {
-      "command": "cobra-crm-mapping.helloWorld",
-      "title": "Hello World"
-    }, 
-    {
-      "command": "cobra-crm-mapping.tableNameLogical",
-      "title": "Suche nach physikalischem Tabellennamen"
+      "command": "cobra-crm-mapping.queryCobraMapping",
+      "title": "Cobra Datenbankstruktur"
     }]
   },
   "scripts": {

@@ -15,11 +15,11 @@
     "commands": [
     {
       "command": "cobra-crm-mapping.queryCobraColumns",
-      "title": "Cobra query columns"
+      "title": "COBRA Database Columns"
     },
     {
       "command": "cobra-crm-mapping.queryCobraTables",
-      "title": "Cobra query tables"
+      "title": "COBRA Database Tables"
     }]
   },
   "scripts": {

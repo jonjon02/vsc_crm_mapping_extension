@@ -71,14 +71,42 @@ function activate(context) {
 			return {
 				label: `${table.ColNameLogical} \u{2192} [${table.ColNameUser}]`, 
 				detail:  table.ColDescr,
-				description:`Tabelle: ${table.TableNameUser} | ${table.TableNameLogical}`
+				description:`Tabelle: ${table.TableNameUser} | ${table.TableNameLogical}`,
+				tableLogical: table.TableNameLogical,
+				colLogical: table.ColNameLogical,
+				colUser: table.ColNameUser
 				}
 			})
 
-			vscode.window.showQuickPick(cols,
+			const selectedCol = await vscode.window.showQuickPick(cols,
 			{ matchOnDetail: true, matchOnDescription: true
 			 }
 			)
+
+			if (selectedCol) {
+
+				console.log(selectedCol)
+
+				let editor = vscode.window.activeTextEditor
+								
+				if(editor) {
+					
+					await vscode.languages.setTextDocumentLanguage(editor.document, 'sql')
+					vscode.window.setStatusBarMessage('Sprachmodus auf SQL geändert', 3000)
+
+					// const colValue = selectedCol.map(item => item.TableNameLogical)
+
+					const sqlstring = `SELECT ${selectedCol.colLogical} AS [${selectedCol.colUser}] FROM ${selectedCol.tableLogical}`
+					const snippet = new vscode.SnippetString(sqlstring)
+					
+					editor.insertSnippet(snippet)
+				}
+				
+				else {
+					vscode.window.showErrorMessage("Error: Please open a new editor window!")
+				}
+
+			}
 		})
 
 	const queryTables  = vscode.commands.registerCommand(
@@ -99,7 +127,8 @@ function activate(context) {
 			if (!distinctTablesMap.has(logicalName)) {
 				distinctTablesMap.set(logicalName, {
 					label: item.TableNameLogical,
-					detail: item.TableNameUser
+					detail: item.TableNameUser,
+					description: "Database: 'Cobra_Data' | Schema: 'DBO'"
 				}
 				)
 			}
@@ -113,13 +142,14 @@ function activate(context) {
 
 		if (selectedTable) {
 
-			vscode.window.showInformationMessage(`Showing columns of ${selectedTable.detail} (${selectedTable.label})`)
-
 			const cols = mappingData.sort().map(table => {
 			return {
 				label: `${table.ColNameLogical} \u{2192} [${table.ColNameUser}]`, 
 				detail : `${table.TableNameUser} | ${table.TableNameLogical}`,
-				description: table.ColDescr
+				description: table.ColNameLogical,
+				colname: table.ColNameLogical,
+				colnameuser: table.ColNameUser,
+				tablename: table.TableNameLogical
 				}
 			})
 
@@ -127,23 +157,45 @@ function activate(context) {
 				return item.detail.startsWith(selectedTable.detail)
 			})
 
-			const selectedCol = await vscode.window.showQuickPick(filteredCols,
-			{ matchOnDetail: true}
-			)
+			
+			const optionsArray = [
+				`Generate SELECT statement for "${selectedTable.label}" \u{2192} "${selectedTable.detail}"`, 
+				`Show column mapping of "${selectedTable.label}"  \u{2192} "${selectedTable.detail}"`
+			]
+			const selectedAction = await vscode.window.showQuickPick(optionsArray)
 
-			if(selectedCol) {
-				const editor = vscode.window.activeTextEditor
+			if (selectedAction === optionsArray[0]) {
+
+				let editor = vscode.window.activeTextEditor
+
+				if (editor) {
 				
-				if(editor) {
-					
-					await vscode.languages.setTextDocumentLanguage(editor.document, 'sql')
-					vscode.window.setStatusBarMessage('Sprachmodus auf SQL geändert', 3000)
+				await vscode.languages.setTextDocumentLanguage(editor.document, 'sql')
+				vscode.window.setStatusBarMessage('Sprachmodus auf SQL geändert', 3000)
 
-					const sqlstring = `SELECT ${selectedCol.label.replace('\u{2192}', 'AS')} FROM ${selectedTable.label}`
-					const snippet = new vscode.SnippetString(sqlstring)
-					
-					editor.insertSnippet(snippet)
+				const filteredCols = cols.filter(col => {
+					return col.tablename === selectedTable.label
+				})
+				
+				const tabString = "\t"
+				const colValues = filteredCols.map(item => tabString + item.colname + " AS " + "["+item.colnameuser+"]")
+		
+				const sqlString = `SELECT\n${colValues.join(",\n")}\nFROM\n\t${selectedTable.label}`
+				const snippet = new vscode.SnippetString(sqlString)
+				
+				editor.insertSnippet(snippet)
 				}
+			
+				else {
+					vscode.window.showErrorMessage("Error: Please open a new editor window!")
+				}
+			}
+
+			if (selectedAction === optionsArray[1]) {
+				await vscode.window.showQuickPick(filteredCols, {
+					matchOnDescription: true,
+					matchOnDetail: true
+				})
 			}
 		}
 

@@ -1,5 +1,7 @@
 \data
 
+cobra-crm-mapping/bu_ext.js
+
 # Logs
 logs
 *.log

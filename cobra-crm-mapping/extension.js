@@ -2,7 +2,7 @@ const consoleModule = require('console')
 const vscode = require('vscode');
 const fs = require('fs').promises
 
-let MAPPING_PATH_KEY = 'path';
+let MAPPING_PATH_KEY = '';
 let dataCache = null;
 
 // /Volumes/C$/cobraServer/MappingExport/cobra_crm_mapping.json
@@ -55,8 +55,20 @@ function activate(context) {
 			return null;
 		}
 	}
+
+	const reloadPath = vscode.commands.registerCommand(
+		'cobra-crm-mapping.newPath',
+		async () => {
+
+			MAPPING_PATH_KEY = '';
+			dataCache = null;
+			context.globalState.update(MAPPING_PATH_KEY, "")
+			dataCache = getAndValidateMappingPath()
+		}
+
+		)
 	
-	const test = vscode.commands.registerCommand(
+	const cobraColumns = vscode.commands.registerCommand(
 		'cobra-crm-mapping.queryCobraColumns', 
 
 		async () => {

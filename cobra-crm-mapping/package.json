@@ -20,7 +20,13 @@
     {
       "command": "cobra-crm-mapping.queryCobraTables",
       "title": "COBRA Database Tables"
-    }]
+    },
+    {
+      "command": "cobra-crm-mapping.newPath",
+      "title": "COBRA Load Mapping File"
+
+    }
+  ]
   },
   "scripts": {
     "lint": "eslint .",

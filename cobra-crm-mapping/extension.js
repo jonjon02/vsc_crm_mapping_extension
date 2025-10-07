@@ -3,9 +3,7 @@ const vscode = require('vscode');
 const fs = require('fs').promises
 
 let MAPPING_PATH_KEY = '';
-let dataCache = null;
-
-// /Volumes/C$/cobraServer/MappingExport/cobra_crm_mapping.json
+let dataCache = null;	
 
 /**
  * @param {vscode.ExtensionContext} context

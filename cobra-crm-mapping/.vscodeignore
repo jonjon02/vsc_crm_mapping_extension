@@ -2,6 +2,7 @@
 .vscode-test/**
 test/**
 sql/**
+data/**
 .gitignore
 .yarnrc
 vsc-extension-quickstart.md

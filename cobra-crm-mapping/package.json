@@ -2,6 +2,7 @@
   "name": "cobra-crm-mapping",
   "displayName": "COBRA-CRM-Mapping",
   "description": "",
+  "icon": "./extension_logo_transparent.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.104.0"

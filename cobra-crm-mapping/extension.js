@@ -14,6 +14,8 @@ function activate(context) {
 
 	async function getAndValidateMappingPath() {
 		let inputPath = context.globalState.get(MAPPING_PATH_KEY)
+
+		console.log(inputPath)
 	
 		if (!inputPath) {
 			inputPath = await vscode.window.showInputBox({
@@ -60,12 +62,20 @@ function activate(context) {
 		'cobra-crm-mapping.newPath',
 		async () => {
 
-			MAPPING_PATH_KEY = '';
+			MAPPING_PATH_KEY = "";
 			dataCache = null;
 			context.globalState.update(MAPPING_PATH_KEY, "")
-			dataCache = getAndValidateMappingPath()
-		}
+			const inputPath = await getAndValidateMappingPath()
+			
+			if (inputPath) {
+			
+				console.log(context.globalState.get(MAPPING_PATH_KEY))
+				vscode.window.showInformationMessage("Path loaded sucessfully: " + inputPath)
 
+				vscode.commands.executeCommand('cobra-crm-mapping.queryCobraColumns')
+		
+			}
+		}
 		)
 	
 	const cobraColumns = vscode.commands.registerCommand(

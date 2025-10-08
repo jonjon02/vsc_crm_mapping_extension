@@ -4,7 +4,8 @@
   "description": "Database Column Mapping Tool",
   "icon": "./icons/extension_icon.png",
   "author": "Johannes Bruch",
-   "repository": "https://github.com/jonjon02/vsc_crm_mapping_extension",
+  "publisher": "JohannesBruch",
+  "repository": "https://github.com/jonjon02/vsc_crm_mapping_extension",
   "readme": "./README.md",
   "version": "1.0.0",
   "engines": {

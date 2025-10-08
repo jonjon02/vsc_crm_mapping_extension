@@ -1,9 +1,12 @@
 {
   "name": "cobra-crm-mapping",
   "displayName": "COBRA-CRM-Mapping",
-  "description": "",
-  "icon": "./extension_icon.png",
-  "version": "0.0.1",
+  "description": "Database Column Mapping Tool",
+  "icon": "./icons/extension_icon.png",
+  "author": "Johannes Bruch",
+   "repository": "https://github.com/jonjon02/vsc_crm_mapping_extension",
+  "readme": "./README.md",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.104.0"
   },

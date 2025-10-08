@@ -1,9 +1,9 @@
 # Cobra-CRM-Mapping Extension:
-This extension allows users to view all columns of a CRM database with their corresponding physical column names, user-level column names and column details. Additionally, columns can be preseleceted via table-view and users can generate SELECT-statements that conveniently include user-level aliases for further queries.
+This extension allows users to view all columns of a (CRM) database with their corresponding physical column names, user-level column names and column details. Additionally, columns can be preseleceted via table-view and users can generate SELECT-statements that conveniently include user-level aliases for further queries.
 
-Although this extension is specificly designed for Cobra-CRM, it generally works for every database, if the JSON-file fits the expected schema.
+Although this extension is specificly designed for Cobra-CRM, it generally works for any database, if the json file fits the expected schema.
 
-# JSON-file example
+# Json example:
 This represents one column in the mapping.json
 
 [
@@ -16,10 +16,17 @@ This represents one column in the mapping.json
    }
 ]
 
-# Prerequisites for this Extension to work:
-- Service/Job that exports JSON-File, for example via BCP 
+# Starting the extension:
+All commands of the Cobra-CRM-Mapping extension start with the Keyword "Cobra". When executed the first time, you will be prompted to provide a path to the mapping.json.
+
+If the path ever changes or should be deleted from global state, use the "Cobra Load Mapping File"-Command. 
+
+# Refreshing the data:
+The extension does *not* constantly refresh the mapping-data. In order to view any changes, the extension must be restarted.
+
+# Prerequisites for creating a mapping.json:
+- View that contains data in the required format.
+- Service/Job that exports JSON-File from SQL-Server, for example via BCP 
 - Database-Trigger on *Cobra_Data.DBO.AP_FIELDINFOS* that *asynchronously* starts the Service/Job
 
-# Optional:
-- View that contains all joined tables and simplifies the actual export SQL-Command.
 

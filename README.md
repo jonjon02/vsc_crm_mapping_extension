@@ -3,6 +3,8 @@ This extension allows users to view all columns of a (CRM) database with their c
 
 Although this extension is specificly designed for Cobra-CRM, it generally works for any database, if the json file fits the expected schema.
 
+Download: https://marketplace.visualstudio.com/items?itemName=JohannesBruch.cobra-crm-mapping
+
 # Json example:
 This represents one column in the mapping.json
 

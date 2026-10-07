@@ -2,6 +2,9 @@
 
 cobra-crm-mapping/bu_ext.js
 
+#macOS
+.DS_Store
+
 # Logs
 logs
 *.log
